@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Engineer;
+
+<h2>Engineer Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+
+
+@if(@Model.Machines.Count == 0)
+{
+  <p>This Engineer does not contain any Machines</p>
+}
+else
+{
+  <p>Machines the Engineer contains:</p>
+  <ul>
+    @foreach(var join in Model.Machines)
+    {
+      <li>@join.Machine.Type</li>
+    @using (Html.BeginForm("DeleteRelationShip", "Engineers"))
+    {
+      @Html.Hidden("joinId", @join.MachineEngineerId)
+      <input type="submit" value="Delete"/>
+    }
+    }
+  </ul>
+}
+<input type="button" class="btn btn-dark" value="Edit This Engineer" onclick="location.href='@Url.Action("Edit", "Engineers", new { id = Model.EngineerId })'" />
+<input type="button" class="btn btn-dark" value="Delete This Engineer" onclick="location.href='@Url.Action("Delete", "Engineers", new { id = Model.EngineerId })'" />

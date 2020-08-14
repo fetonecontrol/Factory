@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Machine
+<h2>Machine Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)</h3>
+
+@if(@Model.Engineers.Count ==0)
+{
+  <p>This Machine does not belong to any Engineers</p>
+}
+else
+{
+  <p>Engineers the Machine belongs to:</p>
+<ul>
+  @foreach(var join in Model.Engineers)
+  {
+    <li>@join.Engineer.Name</li>
+    @using (Html.BeginForm("DeleteRelationShip", "Machines"))
+    {
+      @Html.Hidden("joinId", @join.MachineEngineerId)
+      <input type="submit" class="btn btn-dark" value="Delete"/>
+    }
+  }
+</ul>
+}
+<input type="button" class="btn btn-dark" value="Edit Machine" onclick="location.href='@Url.Action("Edit", "Machines", new { id = Model.MachineId })'" />
+<input type="button" class="btn btn-dark" value="Delete Machine" onclick="location.href='@Url.Action("Delete", "Machines", new { id = Model.MachineId })'" />
