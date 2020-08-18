@@ -23,6 +23,7 @@ _Establish many to many relationship between Engineers and Machines_
 * _Run $ dotnet restore to download all dev dependencies_
 * _Run $ dotnet build to create project_
 * _In MySql WorkBench, select Data Import from the Server tab, navigate to the root directory of this folder, and select frederick_ernest.sql_
+* _Alternatively, run dotnet ef database update from the CLI, to create a DB with the structure outlined in the context file_
 
 ## Known Bugs
 
